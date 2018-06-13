@@ -25,6 +25,16 @@
         "build": {
           "build/netstandard2.0/NETStandard.Library.targets": {}
         }
+      },
+      "MarkI.IRepository/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "compile": {
+          "bin/placeholder/MarkI.IRepository.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/MarkI.IRepository.dll": {}
+        }
       }
     }
   },
@@ -168,10 +178,16 @@
         "netstandard.library.2.0.3.nupkg.sha512",
         "netstandard.library.nuspec"
       ]
+    },
+    "MarkI.IRepository/1.0.0": {
+      "type": "project",
+      "path": "../MarkI.IRepository/MarkI.IRepository.csproj",
+      "msbuildProject": "../MarkI.IRepository/MarkI.IRepository.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.0": [
+      "MarkI.IRepository >= 1.0.0",
       "NETStandard.Library >= 2.0.3"
     ]
   },
@@ -202,7 +218,11 @@
       },
       "frameworks": {
         "netstandard2.0": {
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\QuituLabs\\MarkI\\MarkI.IRepository\\MarkI.IRepository.csproj": {
+              "projectPath": "C:\\QuituLabs\\MarkI\\MarkI.IRepository\\MarkI.IRepository.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

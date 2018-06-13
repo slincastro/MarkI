@@ -8,7 +8,7 @@ namespace MarkI.Login.Tests
         Login _login;
         public LoginTests()
         {
-            _login = new Login();
+            _login = new Login( new UsersRepositoryTest());
         }
 
         [Fact]

@@ -7,3 +7,6 @@ C:\QuituLabs\MarkI\MarkI.Login\obj\Debug\netstandard2.0\MarkI.Login.AssemblyInfo
 C:\QuituLabs\MarkI\MarkI.Login\obj\Debug\netstandard2.0\MarkI.Login.AssemblyInfo.cs
 C:\QuituLabs\MarkI\MarkI.Login\obj\Debug\netstandard2.0\MarkI.Login.dll
 C:\QuituLabs\MarkI\MarkI.Login\obj\Debug\netstandard2.0\MarkI.Login.pdb
+C:\QuituLabs\MarkI\MarkI.Login\bin\Debug\netstandard2.0\MarkI.IRepository.dll
+C:\QuituLabs\MarkI\MarkI.Login\bin\Debug\netstandard2.0\MarkI.IRepository.pdb
+C:\QuituLabs\MarkI\MarkI.Login\obj\Debug\netstandard2.0\MarkI.Login.csproj.CopyComplete
