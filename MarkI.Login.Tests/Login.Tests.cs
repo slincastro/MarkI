@@ -14,38 +14,42 @@ namespace MarkI.Login.Tests
         [Fact]
         public void ShouldReturnTrueWhenISendAvalidCredentials()
         {
-            //SetUp
-
-            //SUT
+            const string userName = "Paul";
+            const string password = "EsponjaSexi69";
             
-            var currentResult = _login.Autorize("Paul","EsponjaSexi69");
-            //Assert
+            var currentResult = _login.Autorize(userName, password);
+            
             Assert.True(currentResult);
         }
 
         [Fact]
         public void ShouldReturnFalseWhenISendInvalidCredentials()
         {
-            var currentResult = new Login().Autorize("BadUserName","BadPassword");
+            const string badUserName = "BadUserName";
+            const string badPassword = "BadPassword";
+            
+            var currentResult = _login.Autorize(badUserName, badPassword);
+            
             Assert.False(currentResult);
         }
 
         [Fact]
         public void ShouldThrowExceptionWhenSendEmptyCredentials()
         {
-            Assert.Throws<ArgumentException>(()=>new Login().Autorize("",""));
+            Assert.Throws<ArgumentException>(()=>_login.Autorize(string.Empty,string.Empty));
         }
 
         [Fact]
         public void ShouldThrowExceptionWhenSendNullCredentials()
         {
-            Assert.Throws<ArgumentException>(()=>new Login().Autorize(null,null));
+            Assert.Throws<ArgumentException>(()=>_login.Autorize(null,null));
         }
 
         [Fact]
         public void ShouldThrowExceptionWhenSendUserNameNullCredentials()
         {
-            Assert.Throws<ArgumentException>(()=>new Login().Autorize(null,"BadPassword"));
+            const string badPassword = "BadPassword";
+            Assert.Throws<ArgumentException>(()=>_login.Autorize(null, badPassword));
         }
     }
 }
