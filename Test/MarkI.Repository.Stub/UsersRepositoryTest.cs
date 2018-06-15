@@ -3,7 +3,7 @@ using MarkI.IRepository;
 
 namespace MarkI.Login.Tests
 {
-    internal class UsersRepositoryTest : IUsers
+    public class UsersRepositoryTest : IUsers
     {
         public Dictionary<string, string> GetUsers()
         {

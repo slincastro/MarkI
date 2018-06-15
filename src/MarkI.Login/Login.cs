@@ -3,10 +3,10 @@ using MarkI.IRepository;
 
 namespace MarkI.Login
 {
-    public class Login
+    public class Autorizer
     {
         IUsers _repository;
-        public Login(IUsers repository)
+        public Autorizer(IUsers repository)
         {
             _repository = repository;            
         }

@@ -13,4 +13,10 @@
     <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\MarkI.Login\MarkI.Login.csproj" />
+    <ProjectReference Include="..\..\src\MarkI.WebApi\MarkI.WebApi.csproj" />
+    <ProjectReference Include="..\..\src\MarkI.IRepository\MarkI.IRepository.csproj" />
+    <ProjectReference Include="..\MarkI.Repository.Stub\MarkI.Repository.Stub.csproj" />
+  </ItemGroup>
 </Project>
