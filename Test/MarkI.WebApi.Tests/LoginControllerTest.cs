@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -59,6 +60,26 @@ namespace MarkI.Login.Tests
             var classAttributes = typeof(AutorizationController).GetCustomAttributes(typeof(RouteAttribute),false).FirstOrDefault();
  
             Assert.IsType<RouteAttribute>(classAttributes);
+        }
+
+        [Fact]
+        public void ShouldBeAControllerClass()
+        {
+           var classParent = typeof(AutorizationController).BaseType.Name;
+            const string ExpectedParentType = "Controller";
+            Assert.Equal(ExpectedParentType, classParent);
+
+        }
+
+        [Fact]
+        public void ShouldBeFromBodyParam()
+        {
+            MethodBase method = typeof(AutorizationController).GetMethod("Login");
+
+            var parameters = method.GetParameters();
+            var attributesParameters= parameters[0].GetCustomAttributes(typeof(FromBodyAttribute),false);
+            
+            Assert.True(attributesParameters.Length > 0);
         }
     }
 }
