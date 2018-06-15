@@ -5,10 +5,10 @@ namespace MarkI.Login.Tests
 {
     public class LoginTests
     {
-        Login _login;
+        Autorizer _login;
         public LoginTests()
         {
-            _login = new Login( new UsersRepositoryTest());
+            _login = new Autorizer( new UsersRepositoryTest());
         }
 
         [Fact]
