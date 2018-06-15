@@ -23,6 +23,28 @@ namespace MarkI.Login.Tests
         }
 
         [Fact]
+        public async Task ShouldReturn400whenSendInvalidCredentials()
+        {
+            var controller = new LoginController(new UsersRepositoryTest());
+
+            var model = new Credentials{ User = "Paul", Password = "wrongPassword" };
+            var result = await controller.Login(model);
+
+            var viewResult = Assert.IsType<BadRequestResult>(result);
+        }
+
+        [Fact]
+        public async Task ShouldReturn400whenSendEmptyCredentials()
+        {
+            var controller = new LoginController(new UsersRepositoryTest());
+
+            var model = new Credentials{ User = "Paul", Password = string.Empty };
+            var result = await controller.Login(model);
+
+            var viewResult = Assert.IsType<BadRequestResult>(result);
+        }
+
+        [Fact]
         public void ShouldHaveHttpPostAttribute()
         {
             MethodBase method = typeof(LoginController).GetMethod("Login");
