@@ -6,21 +6,22 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MarkI.WebApi.Controllers
 {
-    public class LoginController : Controller
+    [Route("api/[controller]")]
+    public class AutorizationController : Controller
     {
         private IUsers usersRepositoryTest;
 
-        public LoginController(IUsers usersRepositoryTest)
+        public AutorizationController(IUsers usersRepositoryTest)
         {
             this.usersRepositoryTest = usersRepositoryTest;
         }
 
         [HttpPost("Login")]
-        public async Task<IActionResult> Login(Credentials model)
+        public async Task<IActionResult> Login([FromBody]Credentials model)
         {
             try
             {
-                var response = new Autorizer(usersRepositoryTest).Autorize(model.User,model.Password);
+                var response = new Autorizer(usersRepositoryTest).Autorize(model.UserName,model.Password);
 
                 if(response)
                     return new OkResult();

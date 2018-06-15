@@ -14,9 +14,9 @@ namespace MarkI.Login.Tests
         [Fact]
         public async Task ShouldReturn200whenSendValidCredentials()
         {
-            var controller = new LoginController(new UsersRepositoryTest());
+            var controller = new AutorizationController(new UsersRepositoryTest());
 
-            var model = new Credentials{ User = "Paul", Password = "EsponjaSexi69" };
+            var model = new Credentials{ UserName = "Paul", Password = "EsponjaSexi69" };
             var result = await controller.Login(model);
 
             var viewResult = Assert.IsType<OkResult>(result);
@@ -25,9 +25,9 @@ namespace MarkI.Login.Tests
         [Fact]
         public async Task ShouldReturn400whenSendInvalidCredentials()
         {
-            var controller = new LoginController(new UsersRepositoryTest());
+            var controller = new AutorizationController(new UsersRepositoryTest());
 
-            var model = new Credentials{ User = "Paul", Password = "wrongPassword" };
+            var model = new Credentials{ UserName = "Paul", Password = "wrongPassword" };
             var result = await controller.Login(model);
 
             var viewResult = Assert.IsType<BadRequestResult>(result);
@@ -36,21 +36,29 @@ namespace MarkI.Login.Tests
         [Fact]
         public async Task ShouldReturn400whenSendEmptyCredentials()
         {
-            var controller = new LoginController(new UsersRepositoryTest());
+            var controller = new AutorizationController(new UsersRepositoryTest());
 
-            var model = new Credentials{ User = "Paul", Password = string.Empty };
+            var model = new Credentials{ UserName = "Paul", Password = string.Empty };
             var result = await controller.Login(model);
 
             var viewResult = Assert.IsType<BadRequestResult>(result);
         }
 
         [Fact]
-        public void ShouldHaveHttpPostAttribute()
+        public void ShouldHaveHttpPostAttributeInLoginMethod()
         {
-            MethodBase method = typeof(LoginController).GetMethod("Login");
-            var attr = method.GetCustomAttributes(typeof(HttpPostAttribute)).FirstOrDefault();
+            MethodBase method = typeof(AutorizationController).GetMethod("Login");
+            var mathodAttributes = method.GetCustomAttributes(typeof(HttpPostAttribute),false).FirstOrDefault();
  
-            Assert.IsType<HttpPostAttribute>(attr);
+            Assert.IsType<HttpPostAttribute>(mathodAttributes);
+        }
+
+        [Fact]
+        public void ShouldHaveRouteAttributeInClass()
+        {
+            var classAttributes = typeof(AutorizationController).GetCustomAttributes(typeof(RouteAttribute),false).FirstOrDefault();
+ 
+            Assert.IsType<RouteAttribute>(classAttributes);
         }
     }
 }
