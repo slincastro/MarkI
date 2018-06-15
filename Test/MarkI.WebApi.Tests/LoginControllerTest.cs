@@ -11,13 +11,17 @@ namespace MarkI.Login.Tests
     //reference : https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/testing?view=aspnetcore-2.1
     public class LoginControllerTest
     {
+        AutorizationController _controller;
+        public LoginControllerTest()
+        {
+            _controller = new AutorizationController(new UsersRepositoryTest());
+        }
+
         [Fact]
         public async Task ShouldReturn200whenSendValidCredentials()
         {
-            var controller = new AutorizationController(new UsersRepositoryTest());
-
             var model = new Credentials{ UserName = "Paul", Password = "EsponjaSexi69" };
-            var result = await controller.Login(model);
+            var result = await _controller.Login(model);
 
             var viewResult = Assert.IsType<OkResult>(result);
         }
@@ -25,10 +29,8 @@ namespace MarkI.Login.Tests
         [Fact]
         public async Task ShouldReturn400whenSendInvalidCredentials()
         {
-            var controller = new AutorizationController(new UsersRepositoryTest());
-
             var model = new Credentials{ UserName = "Paul", Password = "wrongPassword" };
-            var result = await controller.Login(model);
+            var result = await _controller.Login(model);
 
             var viewResult = Assert.IsType<BadRequestResult>(result);
         }
@@ -36,10 +38,8 @@ namespace MarkI.Login.Tests
         [Fact]
         public async Task ShouldReturn400whenSendEmptyCredentials()
         {
-            var controller = new AutorizationController(new UsersRepositoryTest());
-
             var model = new Credentials{ UserName = "Paul", Password = string.Empty };
-            var result = await controller.Login(model);
+            var result = await _controller.Login(model);
 
             var viewResult = Assert.IsType<BadRequestResult>(result);
         }
