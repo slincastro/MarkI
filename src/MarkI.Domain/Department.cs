@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace MarkI.Department
+namespace MarkI.Domain
 {
     public class Department
     {        
