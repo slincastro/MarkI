@@ -26,7 +26,7 @@ namespace MarkI.WebApi.Controllers
                 if(response)
                     return new OkResult();
             }
-            catch(Exception e)
+            catch(Exception)
             {
                 return new BadRequestResult();        
             }
