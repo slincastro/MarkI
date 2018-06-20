@@ -24,7 +24,7 @@ namespace MarkI.Login.Tests
             var model = new Credentials{ UserName = "Paul", Password = "EsponjaSexi69" };
             var result = await _controller.Login(model);
 
-            var viewResult = Assert.IsType<OkResult>(result);
+            Assert.IsType<OkResult>(result);
         }
 
         [Fact]
