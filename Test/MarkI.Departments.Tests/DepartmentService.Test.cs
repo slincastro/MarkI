@@ -1,7 +1,10 @@
+using MarkI.Departments;
+using MarkI.Domain;
 using MarkI.Repository.Stub;
 using Xunit;
 
-namespace MarkI.Department.Tests
+
+namespace MarkI.Departments.Tests
 {
     public class DepartmentServiceTest
     {
@@ -12,7 +15,7 @@ namespace MarkI.Department.Tests
             var currentFloor = 1;
             string currentOwner = "Wilmer Kaviedes";
 
-            var currentDepartment = new MarkI.Domain.Department(currentNumberDepartment,currentFloor,currentOwner);
+            var currentDepartment = new Department(currentNumberDepartment,currentFloor,currentOwner);
             
             var currentResponse = new DepartmentService(new DeparmentsRepositoryTestOk()).Save(currentDepartment);
 

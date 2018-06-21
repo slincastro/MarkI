@@ -1,6 +1,7 @@
+using MarkI.Domain;
 using Xunit;
 
-namespace MarkI.Department.Tests
+namespace MarkI.Departments.Tests
 {
     
     public class DepartmentTest
@@ -12,7 +13,7 @@ namespace MarkI.Department.Tests
             var currentFloor = 1;
             string currentOwner = "Wilmer Kaviedes";
 
-            var currentDeparment = new MarkI.Domain.Department(currentNumberDepartment,currentFloor,currentOwner);
+            var currentDeparment = new Department(currentNumberDepartment,currentFloor,currentOwner);
 
             Assert.Equal(currentNumberDepartment, currentDeparment.Number);
             Assert.Equal(currentFloor, currentDeparment.Floor);

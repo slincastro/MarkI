@@ -1,7 +1,8 @@
 using System;
 using MarkI.IRepository;
+using MarkI.Domain;
 
-namespace MarkI.Department
+namespace MarkI.Departments
 {
     public class DepartmentService
     {
@@ -12,7 +13,7 @@ namespace MarkI.Department
             this.repository = repository;
         }
 
-        public bool Save(MarkI.Domain.Department currentDepartment)
+        public bool Save(Department currentDepartment)
         {
             return repository.Save(currentDepartment);
         }

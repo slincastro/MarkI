@@ -15,11 +15,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{75BA33FA-0
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarkI.WebApi.Tests", "Test\MarkI.WebApi.Tests\MarkI.WebApi.Tests.csproj", "{75010EC0-1958-45B8-92D6-AB2CE71A8F64}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarkI.Department.Tests", "Test\MarkI.Department.Tests\MarkI.Department.Tests.csproj", "{1DD88F95-91E7-4754-9880-6B0E5BFEEF6A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarkI.Departments.Tests", "Test\MarkI.Departments.Tests\MarkI.Departments.Tests.csproj", "{1DD88F95-91E7-4754-9880-6B0E5BFEEF6A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{495455BC-5D96-495A-9F18-282827269691}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarkI.Department", "src\MarkI.Department\MarkI.Department.csproj", "{02E892F8-AF58-4152-829F-5180D5962A1F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarkI.Departments", "src\MarkI.Departments\MarkI.Departments.csproj", "{02E892F8-AF58-4152-829F-5180D5962A1F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarkI.Domain", "src\MarkI.Domain\MarkI.Domain.csproj", "{515146ED-725F-449A-946E-5FFDF66B86B2}"
 EndProject
