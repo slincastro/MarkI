@@ -38,7 +38,8 @@ namespace MarkI.Login.Tests
         [InlineData(null,null)]
         public void ShouldThrowExceptionWhenSendEmptyOrNull(string userName,string password)
         {
-            Assert.Throws<ArgumentException>(()=>_login.Autorize(userName,password));
+            Assert.Throws<ArgumentException>(()=>_login.Autorize(userName,password))
+                                .WithMessage(expectedMessage:"Invalid Credentials");
         }
 
         [Fact]

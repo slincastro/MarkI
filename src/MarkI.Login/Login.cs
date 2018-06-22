@@ -15,7 +15,7 @@ namespace MarkI.Login
         {
             if(string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(password))
             {
-                throw new ArgumentException("Inavlid Credentials");
+                throw new ArgumentException("Invalid Credentials");
             }
 
             var users = _repository.GetUsers();
