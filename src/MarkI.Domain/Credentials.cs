@@ -1,4 +1,4 @@
-namespace MarkI.Login
+namespace MarkI.Domain
 {
     public class Credentials
     {

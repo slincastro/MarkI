@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using MarkI.Domain;
 using MarkI.IRepository;
 using MarkI.WebApi.Controllers;
 using Microsoft.AspNetCore.Mvc;

@@ -16,6 +16,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\MarkI.Login\MarkI.Login.csproj" />
     <ProjectReference Include="..\..\src\MarkI.WebApi\MarkI.WebApi.csproj" />
+    <ProjectReference Include="..\MarkI.Domain\MarkI.Domain.csproj" />
     <ProjectReference Include="..\..\src\MarkI.IRepository\MarkI.IRepository.csproj" />
     <ProjectReference Include="..\MarkI.Repository.Stub\MarkI.Repository.Stub.csproj" />
   </ItemGroup>
