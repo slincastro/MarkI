@@ -33,16 +33,12 @@ namespace MarkI.Login.Tests
             Assert.False(currentResult);
         }
 
-        [Fact]
-        public void ShouldThrowExceptionWhenSendEmptyCredentials()
+        [Theory]
+        [InlineData("","")]
+        [InlineData(null,null)]
+        public void ShouldThrowExceptionWhenSendEmptyOrNull(string userName,string password)
         {
-            Assert.Throws<ArgumentException>(()=>_login.Autorize(string.Empty,string.Empty));
-        }
-
-        [Fact]
-        public void ShouldThrowExceptionWhenSendNullCredentials()
-        {
-            Assert.Throws<ArgumentException>(()=>_login.Autorize(null,null));
+            Assert.Throws<ArgumentException>(()=>_login.Autorize(userName,password));
         }
 
         [Fact]
