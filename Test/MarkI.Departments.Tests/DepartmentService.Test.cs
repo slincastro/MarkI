@@ -45,6 +45,18 @@ namespace MarkI.Departments.Tests
 
         }
 
+        [Fact]
+        public void ShouldCallRepositoryOneTimeWhenIAddNewDepartment()
+        {
+            var mockRepository = new Mock<IDepartments>();
+            mockRepository.Setup(repo => repo.Save(_currentDepartment)).Returns(true);
+                        
+            var currentResponse = new DepartmentService(mockRepository.Object).Save(_currentDepartment);
+
+            mockRepository.Verify(f=>f.Save(_currentDepartment),Times.Exactly(1));
+
+        }
+
          [Fact]
         public void ShouldCallRepositoryWithSameDepartmentWhenIAddNewDepartment()
         {
@@ -53,7 +65,7 @@ namespace MarkI.Departments.Tests
                         
             var currentResponse = new DepartmentService(mockRepository.Object).Save(_currentDepartment);
 
-            mockRepository.Verify(f=>f.Save(It.Is<Department>(d => d.Number.Equals(_currentDepartment.Number))));
+            mockRepository.Verify(f=>f.Save(It.Is<Department>(d => d.Equals(_currentDepartment))));
 
         }
 
