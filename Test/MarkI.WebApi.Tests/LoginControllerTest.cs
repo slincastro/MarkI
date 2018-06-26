@@ -20,28 +20,28 @@ namespace MarkI.Login.Tests
         }
 
         [Fact]
-        public async Task ShouldReturn200whenSendValidCredentials()
+        public void ShouldReturn200whenSendValidCredentials()
         {
-            var model = new Credentials{ UserName = "Paul", Password = "EsponjaSexi69" };
-            var result = await _controller.Login(model);
+            var model = new Credentials { UserName = "Paul", Password = "EsponjaSexi69" };
+            var result = _controller.Login(model);
 
             Assert.IsType<OkResult>(result);
         }
 
         [Fact]
-        public async Task ShouldReturn400whenSendInvalidCredentials()
+        public void ShouldReturn400whenSendInvalidCredentials()
         {
-            var model = new Credentials{ UserName = "Paul", Password = "wrongPassword" };
-            var result = await _controller.Login(model);
+            var model = new Credentials { UserName = "Paul", Password = "wrongPassword" };
+            var result = _controller.Login(model);
 
             var viewResult = Assert.IsType<BadRequestResult>(result);
         }
 
         [Fact]
-        public async Task ShouldReturn400whenSendEmptyCredentials()
+        public void ShouldReturn400whenSendEmptyCredentials()
         {
-            var model = new Credentials{ UserName = "Paul", Password = string.Empty };
-            var result = await _controller.Login(model);
+            var model = new Credentials { UserName = "Paul", Password = string.Empty };
+            var result = _controller.Login(model);
 
             var viewResult = Assert.IsType<BadRequestResult>(result);
         }

@@ -18,20 +18,20 @@ namespace MarkI.WebApi.Controllers
         }
 
         [HttpPost("Login")]
-        public async Task<IActionResult> Login([FromBody]Credentials model)
+        public IActionResult Login([FromBody]Credentials model)
         {
             try
             {
                 var response = new Autorizer(usersRepositoryTest).Autorize(model);
 
-                if(response)
+                if (response)
                     return new OkResult();
             }
-            catch(Exception)
+            catch (Exception)
             {
-                return new BadRequestResult();        
+                return new BadRequestResult();
             }
-            
+
             return new BadRequestResult();
         }
     }
