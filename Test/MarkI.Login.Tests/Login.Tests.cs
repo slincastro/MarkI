@@ -1,5 +1,7 @@
 using System;
+using MarkI.Domain;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace MarkI.Login.Tests
 {
@@ -13,22 +15,20 @@ namespace MarkI.Login.Tests
 
         [Fact]
         public void ShouldReturnTrueWhenISendAvalidCredentials()
-        {
-            const string userName = "Paul";
-            const string password = "EsponjaSexi69";
+        {   
+            var credentials = new Credentials{UserName = "Paul",Password = "EsponjaSexi69"};
             
-            var currentResult = _login.Autorize(userName, password);
+            var currentResult = _login.Autorize(credentials);
             
             Assert.True(currentResult);
         }
 
         [Fact]
         public void ShouldReturnFalseWhenISendInvalidCredentials()
-        {
-            const string badUserName = "BadUserName";
-            const string badPassword = "BadPassword";
-            
-            var currentResult = _login.Autorize(badUserName, badPassword);
+        {   
+            var credentials = new Credentials{UserName = "BadUserName",Password = "BadPassword"};
+
+            var currentResult = _login.Autorize(credentials);
             
             Assert.False(currentResult);
         }
@@ -38,17 +38,20 @@ namespace MarkI.Login.Tests
         [InlineData(null,null)]
         public void ShouldThrowExceptionWhenSendEmptyOrNullCredentials(string userName,string password)
         {
+            var credentials = new Credentials{UserName = userName,Password = password};
+
             const string expectedMessage = "Invalid Credentials";
             
-            Assert.Throws<ArgumentException>(()=> _login.Autorize(userName, password))
+            Assert.Throws<ArgumentException>(()=> _login.Autorize(credentials))
                                 .WithMessage(expectedMessage);
         }
 
         [Fact]
         public void ShouldThrowExceptionWhenSendUserNameNullCredentials()
         {
-            const string badPassword = "BadPassword";
-            Assert.Throws<ArgumentException>(()=>_login.Autorize(null, badPassword));
+            var credentials = new Credentials{UserName = null, Password = "BadPassword"};
+
+            Assert.Throws<ArgumentException>(()=>_login.Autorize(credentials));
         }
     }
 }

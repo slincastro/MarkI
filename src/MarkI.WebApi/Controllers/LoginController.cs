@@ -22,7 +22,7 @@ namespace MarkI.WebApi.Controllers
         {
             try
             {
-                var response = new Autorizer(usersRepositoryTest).Autorize(model.UserName,model.Password);
+                var response = new Autorizer(usersRepositoryTest).Autorize(model);
 
                 if(response)
                     return new OkResult();

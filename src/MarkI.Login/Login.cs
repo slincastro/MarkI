@@ -1,4 +1,5 @@
 using System;
+using MarkI.Domain;
 using MarkI.IRepository;
 
 namespace MarkI.Login
@@ -11,9 +12,9 @@ namespace MarkI.Login
             _repository = repository;            
         }
 
-        public bool Autorize(string userName, string password)
+        public bool Autorize(Credentials crendentials)
         {
-            if(string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(password))
+            if(string.IsNullOrEmpty(crendentials.UserName) || string.IsNullOrEmpty(crendentials.Password))
             {
                 throw new ArgumentException("Invalid Credentials");
             }
@@ -22,8 +23,8 @@ namespace MarkI.Login
 
             string currentPassword ;
 
-            if (users.TryGetValue(userName,out currentPassword))
-                return  password.Equals(currentPassword);
+            if (users.TryGetValue(crendentials.UserName,out currentPassword))
+                return  crendentials.Password.Equals(currentPassword);
 
             return false;
         }
