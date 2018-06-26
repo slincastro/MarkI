@@ -34,6 +34,16 @@ namespace MarkI.Departments.Tests
         }
 
         [Fact]
+        public void ShouldReturnFalseWhenCanNotSave()
+        {
+            
+            var currentResponse = new DepartmentService(new DeparmentRepositoryTestFalse()).Save(_currentDepartment);
+
+            Assert.False(currentResponse);
+
+        }
+
+         [Fact]
         public void ShouldCallRepositoryWhenIAddNewDepartment()
         {
             var mockRepository = new Mock<IDepartments>();
@@ -66,16 +76,6 @@ namespace MarkI.Departments.Tests
             var currentResponse = new DepartmentService(mockRepository.Object).Save(_currentDepartment);
 
             mockRepository.Verify(f=>f.Save(It.Is<Department>(d => d.Equals(_currentDepartment))));
-
-        }
-
-        [Fact]
-        public void ShouldReturnFalseWhenCanNotSave()
-        {
-            
-            var currentResponse = new DepartmentService(new DeparmentRepositoryTestFalse()).Save(_currentDepartment);
-
-            Assert.False(currentResponse);
 
         }
 
