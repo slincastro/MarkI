@@ -1,6 +1,8 @@
 using MarkI.Departments;
 using MarkI.Domain;
+using MarkI.IRepository;
 using MarkI.Repository.Stub;
+using Moq;
 using Xunit;
 
 
@@ -8,8 +10,9 @@ namespace MarkI.Departments.Tests
 {
     public class DepartmentServiceTest
     {
-        [Fact]
-        public void ShouldReturnTrueWhenSendValidDepartment()
+        private Department _currentDepartment;
+
+        public DepartmentServiceTest()
         {
             string currentNumberDepartment = "100A";
             var currentFloor = 1;
@@ -17,22 +20,36 @@ namespace MarkI.Departments.Tests
 
             var currentDepartment = new Department(currentNumberDepartment,currentFloor,currentOwner);
             
-            var currentResponse = new DepartmentService(new DeparmentsRepositoryTestOk()).Save(currentDepartment);
+            _currentDepartment = currentDepartment; 
+        }
+
+        [Fact]
+        public void ShouldReturnTrueWhenSendValidDepartment()
+        {
+                 
+            var currentResponse = new DepartmentService(new DeparmentsRepositoryTestOk()).Save(_currentDepartment);
 
             Assert.True(currentResponse);
 
         }
 
         [Fact]
+        public void ShouldCallRepositoryWhenIAddNewDepartment()
+        {
+            var mockRepository = new Mock<IDepartments>();
+            mockRepository.Setup(repo => repo.Save(_currentDepartment)).Returns(true);
+                        
+            var currentResponse = new DepartmentService(mockRepository.Object).Save(_currentDepartment);
+
+            mockRepository.Verify(f=>f.Save(_currentDepartment));
+
+        }
+
+        [Fact]
         public void ShouldReturnFalseWhenCanNotSave()
         {
-            string currentNumberDepartment = "100A";
-            var currentFloor = 1;
-            string currentOwner = "Wilmer Kaviedes";
-
-            var currentDepartment = new MarkI.Domain.Department(currentNumberDepartment,currentFloor,currentOwner);
             
-            var currentResponse = new DepartmentService(new DeparmentRepositoryTestFalse()).Save(currentDepartment);
+            var currentResponse = new DepartmentService(new DeparmentRepositoryTestFalse()).Save(_currentDepartment);
 
             Assert.False(currentResponse);
 
