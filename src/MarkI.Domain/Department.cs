@@ -11,8 +11,8 @@ namespace MarkI.Domain
             Owner = owner;
         }
 
-        public string Number { get; set; }
-        public int Floor { get; set; }
-        public string Owner { get; set; }
+        public string Number { get; internal set; }
+        public int Floor { get; internal set; }
+        public string Owner { get; internal set; }
     }
 }
