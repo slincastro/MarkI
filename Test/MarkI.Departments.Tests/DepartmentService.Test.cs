@@ -67,7 +67,7 @@ namespace MarkI.Departments.Tests
 
         }
 
-         [Fact]
+        [Fact]
         public void ShouldCallRepositoryWithSameDepartmentWhenIAddNewDepartment()
         {
             var mockRepository = new Mock<IDepartments>();
