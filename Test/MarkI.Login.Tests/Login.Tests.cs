@@ -36,6 +36,8 @@ namespace MarkI.Login.Tests
         [Theory]
         [InlineData("","")]
         [InlineData(null,null)]
+        [InlineData(null,"BadPassword")]
+        [InlineData("BadUserName",null)]
         public void ShouldThrowExceptionWhenSendEmptyOrNullCredentials(string userName,string password)
         {
             var credentials = new Credentials{UserName = userName,Password = password};
@@ -44,14 +46,6 @@ namespace MarkI.Login.Tests
             
             Assert.Throws<ArgumentException>(()=> _login.Autorize(credentials))
                                 .WithMessage(expectedMessage);
-        }
-
-        [Fact]
-        public void ShouldThrowExceptionWhenSendUserNameNullCredentials()
-        {
-            var credentials = new Credentials{UserName = null, Password = "BadPassword"};
-
-            Assert.Throws<ArgumentException>(()=>_login.Autorize(credentials));
-        }
+        }        
     }
 }
