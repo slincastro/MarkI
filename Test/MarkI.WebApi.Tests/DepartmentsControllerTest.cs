@@ -3,6 +3,8 @@ using MarkI.IRepository;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Xunit;
+using System.Linq;
+using System.Reflection;
 
 namespace MarkI.WebApi.Tests
 {
@@ -40,7 +42,6 @@ namespace MarkI.WebApi.Tests
         }
         
         [Fact]
-
         public void ShouldCallDepartmentsServicesWhenISendValidObject()
         {
             var currentDepartment = new Department("dep001",1,"Wilmer Kaviedes");
@@ -49,6 +50,43 @@ namespace MarkI.WebApi.Tests
 
             _mockRepository.Verify(f =>  f.Save(currentDepartment));
 
+        }
+
+        [Fact]
+        public void ShouldBeAControllerClass()
+        {
+           var classParent = typeof(DepartmentsController).BaseType.Name;
+            const string ExpectedParentType = "Controller";
+            Assert.Equal(ExpectedParentType, classParent);
+
+        }
+
+        [Fact]
+        public void ShouldHaveRouteAttributeInClass()
+        {
+            var classAttributes = typeof(DepartmentsController).GetCustomAttributes(typeof(RouteAttribute),false).FirstOrDefault();
+ 
+            Assert.IsType<RouteAttribute>(classAttributes);
+        }
+
+        [Fact]
+        public void ShouldHaveHttpPostAttributeInLoginMethod()
+        {
+            MethodBase method = typeof(DepartmentsController).GetMethod("Save");
+            var mathodAttributes = method.GetCustomAttributes(typeof(HttpPostAttribute),false).FirstOrDefault();
+ 
+            Assert.IsType<HttpPostAttribute>(mathodAttributes);
+        }
+
+        [Fact]
+        public void ShouldBeFromBodyParam()
+        {
+            MethodBase method = typeof(DepartmentsController).GetMethod("Save");
+
+            var parameters = method.GetParameters();
+            var attributesParameters= parameters[0].GetCustomAttributes(typeof(FromBodyAttribute),false);
+            
+            Assert.True(attributesParameters.Length > 0);
         }
     }
 }

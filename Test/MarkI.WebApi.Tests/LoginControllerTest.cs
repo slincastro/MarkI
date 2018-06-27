@@ -47,12 +47,12 @@ namespace MarkI.Login.Tests
         }
 
         [Fact]
-        public void ShouldHaveHttpPostAttributeInLoginMethod()
+        public void ShouldBeAControllerClass()
         {
-            MethodBase method = typeof(AutorizationController).GetMethod("Login");
-            var mathodAttributes = method.GetCustomAttributes(typeof(HttpPostAttribute),false).FirstOrDefault();
- 
-            Assert.IsType<HttpPostAttribute>(mathodAttributes);
+           var classParent = typeof(AutorizationController).BaseType.Name;
+            const string ExpectedParentType = "Controller";
+            Assert.Equal(ExpectedParentType, classParent);
+
         }
 
         [Fact]
@@ -64,13 +64,14 @@ namespace MarkI.Login.Tests
         }
 
         [Fact]
-        public void ShouldBeAControllerClass()
+        public void ShouldHaveHttpPostAttributeInLoginMethod()
         {
-           var classParent = typeof(AutorizationController).BaseType.Name;
-            const string ExpectedParentType = "Controller";
-            Assert.Equal(ExpectedParentType, classParent);
-
+            MethodBase method = typeof(AutorizationController).GetMethod("Login");
+            var mathodAttributes = method.GetCustomAttributes(typeof(HttpPostAttribute),false).FirstOrDefault();
+ 
+            Assert.IsType<HttpPostAttribute>(mathodAttributes);
         }
+
 
         [Fact]
         public void ShouldBeFromBodyParam()

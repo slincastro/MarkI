@@ -53,9 +53,9 @@ namespace MarkI.Departments.Tests
         }
 
         [Theory]
-        [InlineData(null,"Wilmer Kaviedes")]
-        [InlineData("dep001",null)]
-        [InlineData(null,null)]
+        [InlineData("","Wilmer Kaviedes")]
+        [InlineData("dep001","")]
+        [InlineData("","")]
         public void ShouldReturnFalseWhenDepartmentIsInvalid(string numberDepartment,string owner)
         {
             const int floor = 1;
