@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using MarkI.IRepository;
 
-namespace MarkI.Login.Tests
+namespace MarkI.Repository.Stub
 {
     public class UsersRepositoryTest : IUsers
     {

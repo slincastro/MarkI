@@ -5,6 +5,7 @@ namespace MarkI.Domain
 {
     public class Department
     {        
+        public Department(){}
         public Department(string numberDepartment, int floor, string owner)
         {
             Number = numberDepartment ?? ThrowArgumentException("Number Department");
@@ -17,9 +18,9 @@ namespace MarkI.Domain
             throw new ArgumentException($"the field {field} is invalid");
         }
 
-        public string Number { get; internal set; }
-        public int Floor { get; internal set; }
-        public string Owner { get; internal set; }
+        public string Number { get;  set; }
+        public int Floor { get;  set; }
+        public string Owner { get;  set; }
 
         public bool IsValid()
         {

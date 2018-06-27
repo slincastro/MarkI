@@ -1,5 +1,6 @@
 using System;
 using MarkI.Domain;
+using MarkI.Repository.Stub;
 using Xunit;
 using Xunit.Abstractions;
 
