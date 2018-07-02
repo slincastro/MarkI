@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  db:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: MarkI.Db
+    environment:
+      POSTGRES_PASSWORD: example
+      POSTGRES_USER: example
+      POSTGRES_DB: test
+    ports:
+      - 5432:5432
