@@ -7,8 +7,8 @@ namespace MarkI.Repository
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
 
-            optionsBuilder.UseNpgsql("Server=localhost;database=postgres;User ID=postgres;Password=mysecretpassword;Port=5432;Integrated Security=true;Pooling=true;");
-            //optionsBuilder.UsePostgreSql(@"host=server;database=test;user id=postgres;");
+            optionsBuilder.UseNpgsql("Server=localhost;database=test ;User ID=slin;Password=example;Port=5431;Integrated Security=true;Pooling=true;");
+ 
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
