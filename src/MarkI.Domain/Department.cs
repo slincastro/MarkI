@@ -3,12 +3,13 @@ using System.Collections.Generic;
 
 namespace MarkI.Domain
 {
-    public class Department
+    public class Department : Entity
     {        
         public Department(){}
         public Department(string numberDepartment, int floor, string owner)
         {
             Number = numberDepartment ?? ThrowArgumentException("Number Department");
+            Id = numberDepartment;
             Floor = floor;
             Owner = owner ?? ThrowArgumentException("Owner");
         }

@@ -10,6 +10,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.1" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.1.1" />
      <ProjectReference Include="..\MarkI.Domain\MarkI.Domain.csproj" />
+     <ProjectReference Include="..\MarkI.IRepository\MarkI.IRepository.csproj" />
   </ItemGroup>
 
 </Project>
