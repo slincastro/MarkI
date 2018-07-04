@@ -6,6 +6,7 @@ using Xunit;
 using System.Linq;
 using System.Reflection;
 using System;
+using System.Collections.Generic;
 
 namespace MarkI.WebApi.Tests
 {
@@ -99,6 +100,24 @@ namespace MarkI.WebApi.Tests
             var attributesParameters= parameters[0].GetCustomAttributes(typeof(FromBodyAttribute),false);
             
             Assert.True(attributesParameters.Length > 0);
+        }
+
+        [Fact]
+        public void ShouldReturn200WithListOfDepartmentsWhenCallGet()
+        {
+            var departments = new List<Department>{ new Department("dep001",1,"FlowGeroa") ,
+                                  new Department("dep002",1,"El Marquez"),
+                                  new Department("dep001",1,"Geovis") };
+            
+            _mockRepository.Setup(repo => repo.Get()).Returns(departments);
+
+            var currentResponse = _departmentController.Get();
+
+            var viewResult = Assert.IsType<OkObjectResult>(currentResponse);
+
+            var model = Assert.IsAssignableFrom<IEnumerable<Department>>(viewResult.Value);
+            Assert.Equal(3, model.Count());
+            
         }
     }
 }

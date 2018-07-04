@@ -27,5 +27,10 @@ namespace MarkI.WebApi
             
             return new BadRequestResult();            
         }
+
+        public IActionResult Get()
+        {            
+            return new OkObjectResult(_departmentService.Get());
+        }
     }
 }

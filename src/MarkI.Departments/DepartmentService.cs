@@ -29,7 +29,14 @@ namespace MarkI.Departments
 
         public List<Department> Get()
         {
-            return _repository.Get();
+            try
+            {
+                return _repository.Get();
+            }
+            catch(Exception)
+            {
+                throw new ArgumentException("We are having problems, contact the administrator. ");
+            }
         }
     }
 }

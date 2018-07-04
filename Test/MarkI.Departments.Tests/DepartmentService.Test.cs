@@ -90,7 +90,17 @@ namespace MarkI.Departments.Tests
             var currentDepartmets = new DepartmentService(_mockRepository.Object).Get();
 
             Assert.True(currentDepartmets.Count > 0);
+        
+        }
 
+        [Fact]
+        public void ShouldThrowArgumentExceptionWhenGetDepartmentsThrowException()
+        {
+            _mockRepository.Setup(repo => repo.Get()).Throws(new InvalidOperationException());
+
+            var exception = Assert.Throws<ArgumentException>(()=> new DepartmentService(_mockRepository.Object).Get());
+            const string expectedMessage = "We are having problems, contact the administrator. ";
+            Assert.Equal(expectedMessage, exception.Message);
         }
 
         private void SetupMockRepositoryWithTrue()
