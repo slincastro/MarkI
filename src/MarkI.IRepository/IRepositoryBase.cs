@@ -7,5 +7,6 @@ namespace MarkI.IRepository
     {
          bool Add(TEntity entity);
          TEntity GetById(string number);
+         List<TEntity> Get();
     }
 }

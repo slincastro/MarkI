@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using MarkI.Departments;
 using MarkI.Domain;
 using MarkI.IRepository;
@@ -76,6 +77,20 @@ namespace MarkI.Departments.Tests
             var response = new DepartmentService(_mockRepository.Object).Save(_currentDepartment);
 
             Assert.False(response);
+        }
+
+        [Fact]
+        public void ShouldReturnListDepartmentsWhenICallGetDepartments()
+        {
+            var departments = new List<Department>{_currentDepartment, new Department("dep001",1,"FlowGeroa") ,
+                                  new Department("dep002",1,"El Marquez"),
+                                  new Department("dep001",1,"Geovis") };
+            _mockRepository.Setup(repo => repo.Get()).Returns(departments);
+
+            var currentDepartmets = new DepartmentService(_mockRepository.Object).Get();
+
+            Assert.True(currentDepartmets.Count > 0);
+
         }
 
         private void SetupMockRepositoryWithTrue()

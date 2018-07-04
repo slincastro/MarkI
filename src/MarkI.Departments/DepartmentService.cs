@@ -1,6 +1,7 @@
 using System;
 using MarkI.IRepository;
 using MarkI.Domain;
+using System.Collections.Generic;
 
 namespace MarkI.Departments
 {
@@ -24,6 +25,11 @@ namespace MarkI.Departments
             {
                 return false;
             } 
+        }
+
+        public List<Department> Get()
+        {
+            return _repository.Get();
         }
     }
 }

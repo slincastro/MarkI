@@ -25,6 +25,11 @@ namespace MarkI.Repository
             return result;
         }
 
+        public List<TEntity> Get()
+        {
+            throw new NotImplementedException();
+        }
+
         public TEntity GetById(string id)
         {
             var query =_applicationContext.Set<TEntity>().FirstOrDefault(entity => entity.Id.Equals(id));
