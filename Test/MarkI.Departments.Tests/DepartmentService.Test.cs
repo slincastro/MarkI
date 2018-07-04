@@ -1,3 +1,4 @@
+using System;
 using MarkI.Departments;
 using MarkI.Domain;
 using MarkI.IRepository;
@@ -53,7 +54,7 @@ namespace MarkI.Departments.Tests
                         
             var currentResponse = new DepartmentService(_mockRepository.Object).Save(_currentDepartment);
 
-            _mockRepository.Verify(f=>f.Save(_currentDepartment),Times.Exactly(1));
+            _mockRepository.Verify(f=>f.Add(_currentDepartment),Times.Exactly(1));
 
         }
 
@@ -64,8 +65,17 @@ namespace MarkI.Departments.Tests
                         
             var currentResponse = new DepartmentService(_mockRepository.Object).Save(_currentDepartment);
 
-            _mockRepository.Verify(f=>f.Save(It.Is<Department>(d => d.Equals(_currentDepartment))));
+            _mockRepository.Verify(f=>f.Add(It.Is<Department>(d => d.Equals(_currentDepartment))));
 
+        }
+        [Fact]
+        public void ShouldReturnFalseWhenThrowinvalidOperationException()
+        {
+            _mockRepository.Setup(repo => repo.Add(_currentDepartment)).Throws(new InvalidOperationException());
+
+            var response = new DepartmentService(_mockRepository.Object).Save(_currentDepartment);
+
+            Assert.False(response);
         }
 
         private void SetupMockRepositoryWithTrue()
@@ -75,7 +85,7 @@ namespace MarkI.Departments.Tests
 
         private void SetupMockRepositoryWith(bool value)
         {
-            _mockRepository.Setup(repo => repo.Save(_currentDepartment)).Returns(value);
+            _mockRepository.Setup(repo => repo.Add(_currentDepartment)).Returns(value);
         }
     }
 }

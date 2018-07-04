@@ -3,8 +3,8 @@ using MarkI.Domain;
 
 namespace MarkI.IRepository
 {
-    public interface IDepartments
+    public interface IDepartments : IRepositoryBase<Department>
     {
-         bool Save(Department  deparment);
+
     }
 }

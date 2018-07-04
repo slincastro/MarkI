@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using MarkI.Domain;
@@ -14,10 +15,14 @@ namespace MarkI.Repository
             _applicationContext = aplicationContext;
         }
 
-        public void Add(TEntity entity)
+        public bool Add(TEntity entity)
         {
+    
             _applicationContext.Set<TEntity>().Add(entity);
-            _applicationContext.SaveChanges();
+            var result = _applicationContext.SaveChanges() > 0;
+            _applicationContext.Dispose();
+
+            return result;
         }
 
         public TEntity GetById(string id)

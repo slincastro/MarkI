@@ -5,11 +5,22 @@ namespace MarkI.Repository
 {
     public class ApplicationContext : DbContext 
     {
-        public ApplicationContext(DbContextOptionsBuilder options): base (options.Options) { }
+        private DbContextOptionsBuilder _contextBuilder;
+
+        public ApplicationContext(DbContextOptionsBuilder options): base (options.Options) 
+        {
+            _contextBuilder = options;
+         }
+
+        public ApplicationContext()
+        {
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
 
-           // optionsBuilder.UseNpgsql("Server=localhost;database=test ;User ID=slin;Password=example;Port=5431;Integrated Security=true;Pooling=true;");
+            if(_contextBuilder == null)
+            optionsBuilder.UseNpgsql("Server=localhost;database=test ;User ID=slin;Password=example;Port=5431;Integrated Security=true;Pooling=true;");
+
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {

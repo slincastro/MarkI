@@ -4,9 +4,9 @@ using MarkI.IRepository;
 
 namespace MarkI.Repository.Stub
 {
-    public class DeparmentsRepositoryTestOk : IDepartments
+    public class DeparmentsRepositoryTestOkxxx //: IDepartments
     {
-        public bool Save(Department deparment)
+        public bool Add(Department deparment)
         {
             return true;
         }

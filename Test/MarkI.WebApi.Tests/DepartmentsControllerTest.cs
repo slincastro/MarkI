@@ -5,6 +5,7 @@ using Moq;
 using Xunit;
 using System.Linq;
 using System.Reflection;
+using System;
 
 namespace MarkI.WebApi.Tests
 {
@@ -24,7 +25,7 @@ namespace MarkI.WebApi.Tests
         public void ShouldReturn200WhenSendValidDepertment()
         {
             var department = new Department("dep001",1,"Wilmer Huge Calero");
-            _mockRepository.Setup(repo => repo.Save(department)).Returns(true);
+            _mockRepository.Setup(repo => repo.Add(department)).Returns(true);
 
             var currentResponse = _departmentController.Save(department);
 
@@ -40,15 +41,26 @@ namespace MarkI.WebApi.Tests
 
             Assert.IsType<BadRequestResult>(currentResponse);
         }
+
+        [Fact]
+        public void ShouldReturn400WhenThrowException()
+        {            
+            var invalidDepartment = new Department(string.Empty,0,string.Empty);
+
+            _mockRepository.Setup(repo => repo.Add(invalidDepartment)).Throws(new InvalidOperationException());
+            var currentResponse = _departmentController.Save(invalidDepartment);
+
+            Assert.IsType<BadRequestResult>(currentResponse);
+        }
         
         [Fact]
         public void ShouldCallDepartmentsServicesWhenISendValidObject()
         {
             var currentDepartment = new Department("dep001",1,"Wilmer Kaviedes");
-            _mockRepository.Setup(repo => repo.Save(currentDepartment)).Returns(true);
+            _mockRepository.Setup(repo => repo.Add(currentDepartment)).Returns(true);
             var currentResponse = _departmentController.Save(currentDepartment);
 
-            _mockRepository.Verify(f =>  f.Save(currentDepartment));
+            _mockRepository.Verify(f =>  f.Add(currentDepartment));
 
         }
 

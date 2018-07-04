@@ -11,7 +11,7 @@ namespace MarkI.WebApi
     {
         private DepartmentService _departmentService;
 
-        public DepartmentsController(IDepartments deparmentRepository)
+        public DepartmentsController(IRepositoryBase<Department> deparmentRepository)
         {
             _departmentService = new DepartmentService(deparmentRepository);
         }
@@ -19,8 +19,11 @@ namespace MarkI.WebApi
         [HttpPost("Save")]
         public IActionResult Save([FromBody]Department department)
         {   
-            if(department.IsValid())
-            return _departmentService.Save(department) ?  new OkResult() : throw new ArgumentException("We Cant save department"); 
+            if(!department.IsValid())
+            return new BadRequestResult();
+
+            if(_departmentService.Save(department))
+            return new OkResult(); 
             
             return new BadRequestResult();            
         }

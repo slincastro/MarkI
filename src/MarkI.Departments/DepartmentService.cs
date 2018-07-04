@@ -6,16 +6,24 @@ namespace MarkI.Departments
 {
     public class DepartmentService
     {
-        private IDepartments repository;
+        private IRepositoryBase<Department> _repository;
 
-        public DepartmentService(IDepartments repository)
+        public DepartmentService(IRepositoryBase<Department> repository)
         {
-            this.repository = repository;
+            this._repository = repository;
         }
 
         public bool Save(Department currentDepartment)
         {
-            return repository.Save(currentDepartment);
+            try
+            {
+                var result = _repository.Add(currentDepartment);
+                return result;
+            }
+            catch(Exception ex)
+            {
+                return false;
+            } 
         }
     }
 }

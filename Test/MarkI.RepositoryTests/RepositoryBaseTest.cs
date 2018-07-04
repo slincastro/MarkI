@@ -13,8 +13,7 @@ namespace MarkI.RepositoryTests
         {
             var options = new DbContextOptionsBuilder<ApplicationContext>()
                                 .UseInMemoryDatabase(databaseName: "Add_writes_to_database");
-           
-            
+               
             var department = new Department("dep001", 1, "Giovanny Kaviedes");
 
             using (var context = new ApplicationContext(options))
@@ -23,16 +22,14 @@ namespace MarkI.RepositoryTests
                 repository.Add(department);
             }
 
-            
             using (var context = new ApplicationContext(options))
             {
                 var repository = new RepositoryBase<Department>(context);
                 
-                Department departmentExpected = repository.GetById("dep001");
+                var departmentExpected = repository.GetById("dep001");
                 Assert.NotNull(departmentExpected);
                 Assert.Equal("Giovanny Kaviedes", departmentExpected.Owner);
-            }
-            
+            } 
 
         }
     }
