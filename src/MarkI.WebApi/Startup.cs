@@ -31,8 +31,8 @@ namespace MarkI.WebApi
             var options = new DbContextOptionsBuilder<ApplicationContext>();
             services.AddMvc();
             services.AddSingleton<IUsers, UsersRepositoryTest>();
-            services.AddTransient<IRepositoryBase<Department>,RepositoryBase<Department>>(s =>{
-                return new RepositoryBase<Department>(new ApplicationContext());
+            services.AddTransient<IDepartments,DepartmentsRepository>(s =>{
+                return new DepartmentsRepository(new ApplicationContext());
             });
            
         }

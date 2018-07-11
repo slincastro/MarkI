@@ -20,14 +20,14 @@ namespace MarkI.Repository
     
             _applicationContext.Set<TEntity>().Add(entity);
             var result = _applicationContext.SaveChanges() > 0;
-            _applicationContext.Dispose();
 
             return result;
         }
 
         public List<TEntity> Get()
         {
-            throw new NotImplementedException();
+            var query = _applicationContext.Set<TEntity>().ToList();
+            return query;
         }
 
         public TEntity GetById(string id)

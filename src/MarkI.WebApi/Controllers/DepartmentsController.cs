@@ -11,7 +11,7 @@ namespace MarkI.WebApi
     {
         private DepartmentService _departmentService;
 
-        public DepartmentsController(IRepositoryBase<Department> deparmentRepository)
+        public DepartmentsController(IDepartments deparmentRepository)
         {
             _departmentService = new DepartmentService(deparmentRepository);
         }
@@ -28,9 +28,17 @@ namespace MarkI.WebApi
             return new BadRequestResult();            
         }
 
+        [HttpGet]
         public IActionResult Get()
-        {            
-            return new OkObjectResult(_departmentService.Get());
+        {   
+            try
+            {       
+                return new OkObjectResult(_departmentService.Get());
+            }
+            catch (Exception)
+            {
+                return new StatusCodeResult(503);
+            } 
         }
     }
 }

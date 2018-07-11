@@ -119,5 +119,23 @@ namespace MarkI.WebApi.Tests
             Assert.Equal(3, model.Count());
             
         }
+
+         [Fact]
+        public void ShouldHaveHttpGetAttributeInGetDepatmentsMethod()
+        {
+            MethodBase method = typeof(DepartmentsController).GetMethod("Get");
+            var mathodAttributes = method.GetCustomAttributes(typeof(HttpGetAttribute),false).FirstOrDefault();
+ 
+            Assert.IsType<HttpGetAttribute>(mathodAttributes);
+        }
+
+        [Fact]
+        public void ShouldReturn500WhenThrowException()
+        {            
+            _mockRepository.Setup(repo => repo.Get()).Throws(new Exception());
+            var currentResponse = _departmentController.Get();
+
+            Assert.IsType<StatusCodeResult>(currentResponse);
+        }
     }
 }

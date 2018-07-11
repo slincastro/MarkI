@@ -7,9 +7,9 @@ namespace MarkI.Departments
 {
     public class DepartmentService
     {
-        private IRepositoryBase<Department> _repository;
+        private IDepartments _repository;
 
-        public DepartmentService(IRepositoryBase<Department> repository)
+        public DepartmentService(IDepartments repository)
         {
             this._repository = repository;
         }
@@ -21,7 +21,7 @@ namespace MarkI.Departments
                 var result = _repository.Add(currentDepartment);
                 return result;
             }
-            catch(Exception ex)
+            catch(Exception)
             {
                 return false;
             } 
