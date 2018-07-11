@@ -182,7 +182,9 @@ namespace MarkI.WebApi.Tests
 
             var currentResponse = _departmentController.GetById(departmentNumber);
             
-            var viewResult = Assert.IsType<NotFoundResult>(currentResponse);      
+            var viewResult = Assert.IsType<NotFoundObjectResult>(currentResponse); 
+            var model = Assert.IsAssignableFrom<String>(viewResult.Value);
+            Assert.Equal($"Value {departmentNumber} not found",model); 
         }
 
         [Fact]

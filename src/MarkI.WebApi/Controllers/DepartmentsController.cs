@@ -1,4 +1,5 @@
 using System;
+using System.Net;
 using MarkI.Departments;
 using MarkI.Domain;
 using MarkI.IRepository;
@@ -37,21 +38,21 @@ namespace MarkI.WebApi
             }
             catch (Exception)
             {
-                return new StatusCodeResult(503);
+                return new StatusCodeResult((int)HttpStatusCode.ServiceUnavailable);
             } 
         }
 
-        [HttpGet("{id}") ]
+        [HttpGet("{id}")]
         public IActionResult GetById(string id)
         {
             try
             {
                 var departmentResult =  _departmentService.GetById(id);
-                return departmentResult != null ? new OkObjectResult(departmentResult) : (IActionResult)new NotFoundObjectResult($"value {id}");
+                return departmentResult != null ? new OkObjectResult(departmentResult) : (IActionResult)new NotFoundObjectResult($"Value {id} not found");
             }
             catch (Exception)
             {
-                return new StatusCodeResult(503);
+                return new StatusCodeResult((int)HttpStatusCode.ServiceUnavailable);
             }
         }
     }
