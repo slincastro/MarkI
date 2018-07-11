@@ -7,6 +7,7 @@ namespace MarkI.Departments
 {
     public class DepartmentService
     {
+        private const string _errorMessage = "We are having problems, contact the administrator. ";
         private IDepartments _repository;
 
         public DepartmentService(IDepartments repository)
@@ -35,7 +36,19 @@ namespace MarkI.Departments
             }
             catch(Exception)
             {
-                throw new ArgumentException("We are having problems, contact the administrator. ");
+                throw new ArgumentException(_errorMessage);
+            }
+        }
+
+        public Department GetById(string numberDepartment)
+        {
+            try
+            {                
+                return _repository.GetById(numberDepartment);
+            }
+            catch (Exception)
+            {
+                throw new ArgumentException(_errorMessage);
             }
         }
     }

@@ -130,12 +130,68 @@ namespace MarkI.WebApi.Tests
         }
 
         [Fact]
-        public void ShouldReturn500WhenThrowException()
+        public void ShouldReturn500WhenGetThrowException()
         {            
+            const int statusCodeExpected = 503;
+            
             _mockRepository.Setup(repo => repo.Get()).Throws(new Exception());
             var currentResponse = _departmentController.Get();
 
-            Assert.IsType<StatusCodeResult>(currentResponse);
+            var currentCode = Assert.IsType<StatusCodeResult>(currentResponse);
+            Assert.Equal(statusCodeExpected, currentCode.StatusCode);
+        }
+        
+        [Fact]
+        public void ShouldReturn200With1DepartmentsWhenSetValidDepartmentNumberId()
+        {
+            var departmentNumber = "dep001";
+            var department =  new Department("dep001",1,"FlowGeroa");           
+
+            _mockRepository.Setup(repo => repo.GetById(departmentNumber)).Returns(department);
+
+            var currentResponse = _departmentController.GetById(departmentNumber);
+            var viewResult = Assert.IsType<OkObjectResult>(currentResponse);
+            var model = Assert.IsAssignableFrom<Department>(viewResult.Value);
+            var excpectedDepartment = department;
+
+            Assert.Equal(excpectedDepartment.Number, model.Number);
+            Assert.Equal(excpectedDepartment.Floor, model.Floor);
+            Assert.Equal(excpectedDepartment.Owner, model.Owner);          
+        }
+
+        [Fact]
+        public void ShouldReturn500WhenGetbyIDThrowException()
+        {            
+            const int statusCodeExpected = 503;
+            const string departmentNumber = "dep001";
+
+            _mockRepository.Setup(repo => repo.GetById(departmentNumber)).Throws(new Exception());
+            var currentResponse = _departmentController.GetById(departmentNumber);
+
+            var currentCode = Assert.IsType<StatusCodeResult>(currentResponse);
+            Assert.Equal(statusCodeExpected, currentCode.StatusCode);
+        
+        }
+
+        [Fact]
+        public void ShouldReturn404With1DepartmentsWhenSetInvalidDepartmentNumberId()
+        {
+            var departmentNumber = "InvalidNumber";
+            
+            _mockRepository.Setup(repo => repo.GetById(departmentNumber)).Returns((Department)null);
+
+            var currentResponse = _departmentController.GetById(departmentNumber);
+            
+            var viewResult = Assert.IsType<NotFoundResult>(currentResponse);      
+        }
+
+        [Fact]
+        public void ShouldHaveHttpGetAttributeInGetDepatmentsById()
+        {
+            MethodBase method = typeof(DepartmentsController).GetMethod("GetById");
+            var mathodAttributes = method.GetCustomAttributes(typeof(HttpGetAttribute),false).FirstOrDefault();
+ 
+            Assert.IsType<HttpGetAttribute>(mathodAttributes);
         }
     }
 }

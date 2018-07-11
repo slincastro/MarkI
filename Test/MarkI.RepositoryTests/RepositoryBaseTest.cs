@@ -43,6 +43,52 @@ namespace MarkI.RepositoryTests
         [Fact]
         public void ShouldReturn3DepatmentsWhenRequestThem()
         {
+            LoadDepartments();
+
+            using (var context = new ApplicationContext(_options))
+            {
+                var repository = new RepositoryBase<Department>(context);
+                var currentDepartments = repository.Get();
+
+                Assert.Equal(3, currentDepartments.Count);
+
+            }
+
+
+        }
+
+        [Fact]
+        public void ShouldReturn0DepatmentsWhenRequestWithNoExistentId()
+        {
+            LoadDepartments();
+
+            using (var context = new ApplicationContext(_options))
+            {
+                var repository = new RepositoryBase<Department>(context);
+                var currentDepartment = repository.GetById("InvalidId");
+
+                Assert.Null(currentDepartment);
+            }
+        }
+
+        [Fact]
+        public void ShouldReturnOneDepatmentsWhenRequestWithValidId()
+        {
+            LoadDepartments();
+            var expectedDepartment = new Department("dep001", 1, "Giovanny Kaviedes");
+            using (var context = new ApplicationContext(_options))
+            {
+                var repository = new RepositoryBase<Department>(context);
+                var currentDepartment = repository.GetById("dep001");
+
+                Assert.Equal(expectedDepartment.Number,currentDepartment.Number);
+                Assert.Equal(expectedDepartment.Floor,currentDepartment.Floor);
+                Assert.Equal(expectedDepartment.Owner,currentDepartment.Owner);
+            }
+        }
+
+        private void LoadDepartments()
+        {
             var giovisDepartment = new Department("dep001", 1, "Giovanny Kaviedes");
             var damiDepartment = new Department("dep002", 1, "Dami Dami");
             var figueHole = new Department("dep003", 1, "Cojito Figuemora");
@@ -54,18 +100,19 @@ namespace MarkI.RepositoryTests
                 repository.Add(damiDepartment);
                 repository.Add(figueHole);
             }
+        }
 
-            
-            using (var context = new ApplicationContext(_options))
+        [Fact]
+        public void TestConection()
+        {
+
+            var giovisDepartment = new Department("dep001", 1, "Giovanny Kaviedes");
+             using (var context = new ApplicationContext())
             {
                 var repository = new RepositoryBase<Department>(context);
-                var currentDepartments=repository.Get();
-
-                Assert.Equal(3,currentDepartments.Count);
-
+                repository.Get();
+               
             }
-
-
         }
     }
 }

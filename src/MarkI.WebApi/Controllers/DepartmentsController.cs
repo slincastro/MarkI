@@ -40,5 +40,19 @@ namespace MarkI.WebApi
                 return new StatusCodeResult(503);
             } 
         }
+
+        [HttpGet("{id}") ]
+        public IActionResult GetById(string id)
+        {
+            try
+            {
+                var departmentResult =  _departmentService.GetById(id);
+                return departmentResult != null ? new OkObjectResult(departmentResult) : (IActionResult)new NotFoundObjectResult($"value {id}");
+            }
+            catch (Exception)
+            {
+                return new StatusCodeResult(503);
+            }
+        }
     }
 }
