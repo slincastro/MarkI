@@ -19,7 +19,7 @@ namespace MarkI.Repository
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
 
             if(_contextBuilder == null)
-            optionsBuilder.UseNpgsql("Server=localhost;database=test ;User ID=slin;Password=example;Port=5431;Integrated Security=true;Pooling=true;");
+            optionsBuilder.UseNpgsql("Server=localhost;database=testMigrations ;User ID=slin;Password=example;Port=5431;Integrated Security=true;Pooling=true;");
 
         }
 
@@ -27,8 +27,12 @@ namespace MarkI.Repository
  
             modelBuilder.Entity<Department>()
             .HasKey(d => new { d.Number});
+
+            modelBuilder.Entity<Department>()
+            .HasKey(d => new { d.Id});
         }
         public DbSet<Department> Departments { get; set; }
+        public DbSet<Person> Persons {get; set;}
         
     }
 }
