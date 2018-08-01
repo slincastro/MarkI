@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using MarkI.Departments;
+using MarkI.Services;
 using MarkI.Domain;
 using MarkI.IRepository;
 using MarkI.Repository.Stub;

@@ -1,3 +1,4 @@
+using System;
 using MarkI.Domain;
 using MarkI.Repository;
 using Microsoft.EntityFrameworkCore;
@@ -6,7 +7,7 @@ using Xunit;
 
 namespace MarkI.RepositoryTests
 {
-    public class RepositoryBaseTest
+    public class RepositoryBaseTest : IDisposable
     {
         private DbContextOptionsBuilder<ApplicationContext> _options;
 
@@ -43,8 +44,9 @@ namespace MarkI.RepositoryTests
         [Fact]
         public void ShouldReturn3DepatmentsWhenRequestThem()
         {
+            
             LoadDepartments();
-
+            
             using (var context = new ApplicationContext(_options))
             {
                 var repository = new RepositoryBase<Department>(context);
@@ -112,6 +114,14 @@ namespace MarkI.RepositoryTests
                 var repository = new RepositoryBase<Department>(context);
                 repository.Get();
                
+            }
+        }
+
+        public void Dispose()
+        {
+            using (var context = new ApplicationContext(_options))
+            {
+                context.Database.EnsureDeleted();
             }
         }
     }

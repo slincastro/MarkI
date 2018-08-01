@@ -1,6 +1,6 @@
 using System;
 using System.Net;
-using MarkI.Departments;
+using MarkI.Services;
 using MarkI.Domain;
 using MarkI.IRepository;
 using Microsoft.AspNetCore.Mvc;

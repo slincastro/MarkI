@@ -22,7 +22,7 @@
     <ProjectReference Include="..\MarkI.Login\MarkI.Login.csproj" />
     <ProjectReference Include="..\..\Test\MarkI.Repository.Stub\MarkI.Repository.Stub.csproj" />
     <ProjectReference Include="..\MarkI.Domain\MarkI.Domain.csproj" />
-     <ProjectReference Include="..\..\src\MarkI.Departments\MarkI.Departments.csproj" />
+     <ProjectReference Include="..\..\src\MarkI.Services\MarkI.Services.csproj" />
      <ProjectReference Include="..\..\src\MarkI.Repository\MarkI.Repository.csproj" />
   </ItemGroup>
 

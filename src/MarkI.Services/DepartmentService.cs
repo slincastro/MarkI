@@ -3,7 +3,7 @@ using MarkI.IRepository;
 using MarkI.Domain;
 using System.Collections.Generic;
 
-namespace MarkI.Departments
+namespace MarkI.Services
 {
     public class DepartmentService
     {
