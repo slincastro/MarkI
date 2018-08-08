@@ -30,9 +30,13 @@ namespace MarkI.WebApi
         {
             var options = new DbContextOptionsBuilder<ApplicationContext>();
             services.AddMvc();
-            services.AddSingleton<IUsers, UsersRepositoryTest>();
+            services.AddTransient<IUsers, UsersRepositoryTest>();
             services.AddTransient<IDepartments,DepartmentsRepository>(s =>{
                 return new DepartmentsRepository(new ApplicationContext());
+            });
+
+            services.AddTransient<IPerson,PersonRepository>(s =>{
+                return new PersonRepository(new ApplicationContext());
             });
            
         }
