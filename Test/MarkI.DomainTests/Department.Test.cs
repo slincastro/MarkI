@@ -2,9 +2,8 @@ using System;
 using MarkI.Domain;
 using Xunit;
 
-namespace MarkI.Departments.Tests
-{
-    
+namespace MarkI.DomainTests
+{  
     public class DepartmentTest
     {
         private Department _currentDeparment;

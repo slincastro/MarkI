@@ -120,7 +120,7 @@ namespace MarkI.WebApi.Tests
             
         }
 
-         [Fact]
+        [Fact]
         public void ShouldHaveHttpGetAttributeInGetDepatmentsMethod()
         {
             MethodBase method = typeof(DepartmentsController).GetMethod("Get");
@@ -130,7 +130,7 @@ namespace MarkI.WebApi.Tests
         }
 
         [Fact]
-        public void ShouldReturn500WhenGetThrowException()
+        public void ShouldReturn503WhenGetThrowException()
         {            
             const int statusCodeExpected = 503;
             
