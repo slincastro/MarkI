@@ -71,7 +71,6 @@ namespace MarkI.WebApi.Tests
            var classParent = typeof(DepartmentsController).BaseType.Name;
             const string ExpectedParentType = "Controller";
             Assert.Equal(ExpectedParentType, classParent);
-
         }
 
         [Fact]

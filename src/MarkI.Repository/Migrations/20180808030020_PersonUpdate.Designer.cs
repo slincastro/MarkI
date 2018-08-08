@@ -2,15 +2,17 @@
 using MarkI.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace MarkI.Repository.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20180808030020_PersonUpdate")]
+    partial class PersonUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -20,34 +22,37 @@ namespace MarkI.Repository.Migrations
 
             modelBuilder.Entity("MarkI.Domain.Department", b =>
                 {
-                    b.Property<string>("Number")
+                    b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("Floor");
 
-                    b.Property<string>("Id");
+                    b.Property<string>("Number")
+                        .IsRequired();
 
                     b.Property<string>("Owner");
 
-                    b.HasKey("Number");
+                    b.HasKey("Id");
+
+                    b.HasAlternateKey("Number");
 
                     b.ToTable("Departments");
                 });
 
             modelBuilder.Entity("MarkI.Domain.Person", b =>
                 {
-                    b.Property<string>("DocumentId")
+                    b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Email");
+                    b.Property<string>("DocumentId");
 
-                    b.Property<string>("Id");
+                    b.Property<string>("Email");
 
                     b.Property<string>("LastName");
 
                     b.Property<string>("Name");
 
-                    b.HasKey("DocumentId");
+                    b.HasKey("Id");
 
                     b.ToTable("Persons");
                 });

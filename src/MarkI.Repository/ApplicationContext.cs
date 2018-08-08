@@ -28,8 +28,8 @@ namespace MarkI.Repository
             modelBuilder.Entity<Department>()
             .HasKey(d => new { d.Number});
 
-            modelBuilder.Entity<Department>()
-            .HasKey(d => new { d.Id});
+            modelBuilder.Entity<Person>()
+            .HasKey(d => new { d.DocumentId});
         }
         public DbSet<Department> Departments { get; set; }
         public DbSet<Person> Persons {get; set;}

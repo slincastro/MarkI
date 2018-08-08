@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using MarkI.Domain;
@@ -47,7 +48,7 @@ namespace MarkI.WebApi.Tests
         }
 
          [Fact]
-        public void ShouldReturn503WhenGetThrowException()
+        public void ShouldReturn503WhenAddThrowException()
         {            
             const int statusCodeExpected = 503;
             
@@ -93,6 +94,105 @@ namespace MarkI.WebApi.Tests
             var attributesParameters= parameters[0].GetCustomAttributes(typeof(FromBodyAttribute),false);
             
             Assert.True(attributesParameters.Length > 0);
+        }
+
+        [Fact]
+        public void ShouldReturn200With3PersonsWhenCallGetMethod()
+        {
+            var persons = LoadPersons();
+
+            _mockRepository.Setup(s => s.Get()).Returns(persons);
+
+            var response = new PersonController(_mockRepository.Object).Get();
+
+            var viewResult = Assert.IsType<OkObjectResult>(response);
+
+            var model = Assert.IsAssignableFrom<IEnumerable<Person>>(viewResult.Value);
+            Assert.Equal(3, model.Count());
+
+        }
+
+        [Fact]
+        public void ShouldReturn503WhenGetPersonsThrowException()
+        {            
+            const int statusCodeExpected = 503;
+            
+            _mockRepository.Setup(repo => repo.Get()).Throws(new Exception());
+            var currentResponse = new PersonController(_mockRepository.Object).Get();
+
+            var currentCode = Assert.IsType<StatusCodeResult>(currentResponse);
+            Assert.Equal(statusCodeExpected, currentCode.StatusCode);
+        }
+
+        [Fact]
+        public void ShouldHaveHttpGetAttributeInGetMethod()
+        {
+            MethodBase method = typeof(PersonController).GetMethod("Get");
+            var mathodAttributes = method.GetCustomAttributes(typeof(HttpGetAttribute),false).FirstOrDefault();
+ 
+            Assert.IsType<HttpGetAttribute>(mathodAttributes);
+        }
+
+        [Fact]
+        public void ShouldReturn200WithGiovisPersonWhenCallGetByIdMethod()
+        {
+            var persons = LoadPersons();
+            var personId = "1";
+            _mockRepository.Setup(s => s.GetById(personId)).Returns(_person);
+
+            var response = new PersonController(_mockRepository.Object).GetById(personId);
+
+            var viewResult = Assert.IsType<OkObjectResult>(response);
+
+            var model = Assert.IsAssignableFrom<Person>(viewResult.Value);
+            
+            Assert.Equal("Giovis",model.Name);
+
+        }
+
+         [Fact]
+        public void ShouldReturn404WhenSetInvalidPersonId()
+        {
+            var personId = "InvalidNumber";
+            
+            _mockRepository.Setup(repo => repo.GetById(personId)).Returns((Person)null);
+
+            var currentResponse = new PersonController(_mockRepository.Object).GetById(personId);
+            
+            var viewResult = Assert.IsType<NotFoundObjectResult>(currentResponse); 
+            var model = Assert.IsAssignableFrom<String>(viewResult.Value);
+            Assert.Equal($"Value {personId} not found",model); 
+        }
+
+        [Fact]
+        public void ShouldReturn503WhenGetPersonsByIdThrowException()
+        {            
+            const int statusCodeExpected = 503;
+
+            string personId = "1";
+
+            _mockRepository.Setup(repo => repo.GetById(personId)).Throws(new Exception());
+            var currentResponse = new PersonController(_mockRepository.Object).GetById(personId);
+
+            var currentCode = Assert.IsType<StatusCodeResult>(currentResponse);
+            Assert.Equal(statusCodeExpected, currentCode.StatusCode);
+        }
+
+        [Fact]
+        public void ShouldHaveHttpGetAttributeInGetByIdMethod()
+        {
+            MethodBase method = typeof(PersonController).GetMethod("GetById");
+            var mathodAttributes = method.GetCustomAttributes(typeof(HttpGetAttribute),false).FirstOrDefault();
+ 
+            Assert.IsType<HttpGetAttribute>(mathodAttributes);
+        }
+         private static List<Person> LoadPersons () {
+            var newGiovis = new Person { Name = "Giovis", LastName = "Kaviedes", DocumentId = "171984243213", Email = "giovissexy69@ups.edu.ec" };
+            var newSebits = new Person { Name = "Sebits", LastName = "Figuemora", DocumentId = "171984243214", Email = "gaby.morita@longui.com" };
+            var newDamiDami = new Person { Name = "Dami", LastName = "Dami", DocumentId = "171984243215", Email = "Irlandes@leprechaun.ir" };
+
+            var persons = new List<Person> { newGiovis, newSebits, newDamiDami };
+            return persons;
         }
     }
 }

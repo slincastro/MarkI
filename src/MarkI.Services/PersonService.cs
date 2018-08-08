@@ -16,6 +16,7 @@ namespace MarkI.Services
 
         public void Add(Person person)
         {
+            person.Id = person.DocumentId;
             _repository.Add(person);
             
         }
